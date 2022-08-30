@@ -38,7 +38,6 @@ export default class Login extends Component {
   render() {
     const { loginNameInput, isDisabled, loading, redirect } = this.state;
     const LoginScreen = (
-
       <form>
         <label htmlFor="loginNameInput">
           <p>Nome</p>
