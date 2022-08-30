@@ -5,7 +5,7 @@ import Loading from '../pages/Loading';
 export default class Header extends Component {
   state = {
     loginNameInput: 'Richard',
-    loading: false,
+    loading: true,
   };
 
   componentDidMount() {
@@ -13,7 +13,6 @@ export default class Header extends Component {
   }
 
   handleGetUser = async () => {
-    this.setState({ loading: true });
     const userInfo = await getUser();
     this.setState({ loginNameInput: userInfo.name, loading: false });
   };
