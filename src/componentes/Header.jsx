@@ -21,14 +21,21 @@ export default class Header extends Component {
   render() {
     const { loginNameInput, loading } = this.state;
     return (
-      <header data-testid="header-component">
-        <p>Espaço para Logo</p>
+      <>
+        <header data-testid="header-component">
+          { loading
+            ? (
+              <div>
+                <Loading />
+                <p>Espaço para Logo</p>
+              </div>
+            )
+            : <h2 data-testid="header-user-name">{ loginNameInput }</h2> }
+        </header>
         <Link to="/search"><p data-testid="link-to-search">Search</p></Link>
         <Link to="/favorites"><p data-testid="link-to-favorites">Favorites</p></Link>
         <Link to="/profile"><p data-testid="link-to-profile">Profile</p></Link>
-        { loading ? <Loading />
-          : <h2 data-testid="header-user-name">{ loginNameInput }</h2> }
-      </header>
+      </>
     );
   }
 }
