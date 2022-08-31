@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from '../pages/Loading';
 
 export default class Header extends Component {
   state = {
-    loginNameInput: 'Richard',
+    loginNameInput: '',
     loading: true,
   };
 
@@ -21,8 +22,12 @@ export default class Header extends Component {
     const { loginNameInput, loading } = this.state;
     return (
       <header data-testid="header-component">
+        <p>Espaço para Logo</p>
+        <Link to="/search"><p data-testid="link-to-search">Search</p></Link>
+        <Link to="/favorites"><p data-testid="link-to-favorites">Favorites</p></Link>
+        <Link to="/profile"><p data-testid="link-to-profile">Profile</p></Link>
         { loading ? <Loading />
-          : <h1 data-testid="header-user-name">{ loginNameInput }</h1> }
+          : <h2 data-testid="header-user-name">{ loginNameInput }</h2> }
       </header>
     );
   }
