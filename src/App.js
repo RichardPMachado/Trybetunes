@@ -16,27 +16,27 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            component={ Login }
+            render={ (props) => <Login { ...props } /> }
           />
           <Route
             path="/search"
-            component={ Search }
+            render={ (props) => <Search { ...props } /> }
           />
           <Route
             path="/album/:id"
-            component={ Album }
+            render={ (props) => <Album { ...props } /> }
           />
           <Route
             path="/favorites"
-            component={ Favorites }
+            render={ (props) => <Favorites { ...props } /> }
           />
           <Route
             path="/profile"
-            component={ Profile }
+            render={ (props) => <Profile { ...props } /> }
           />
           <Route
             path="*"
-            component={ NotFound }
+            render={ (props) => <NotFound { ...props } /> }
           />
         </Switch>
       </div>

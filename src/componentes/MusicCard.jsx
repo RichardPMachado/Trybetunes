@@ -27,7 +27,6 @@ export default class MusicCard extends Component {
     );
   }
 }
-
 MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,

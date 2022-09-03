@@ -8,7 +8,7 @@ export default class Login extends Component {
     loginNameInput: '',
     isDisabled: true,
     loading: false,
-    redirect: false,
+    isRedirect: false,
     // data: [],
   };
 
@@ -32,11 +32,12 @@ export default class Login extends Component {
     this.setState({ loading: true });
     const { loginNameInput } = this.state;
     await createUser({ name: loginNameInput });
-    this.setState({ redirect: true });
+    this.setState({ isRedirect: true });
   };
 
   render() {
-    const { loginNameInput, isDisabled, loading, redirect } = this.state;
+    // const { isredirect } = this.props;
+    const { loginNameInput, isDisabled, loading, isRedirect } = this.state;
     const LoginScreen = (
       <form>
         <label htmlFor="loginNameInput">
@@ -61,7 +62,7 @@ export default class Login extends Component {
 
     );
     return (
-      redirect ? <Redirect to="/search" />
+      isRedirect ? <Redirect to="/search" />
         : (
           <div data-testid="page-login">
             { loading ? <Loading />
