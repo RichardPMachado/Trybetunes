@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class MusicCard extends Component {
   render() {
     const { previewUrl, trackName, trackId, checked, onChange } = this.props;
+    console.log(checked);
     return (
       <div>
         <p>{ trackName }</p>
@@ -11,7 +12,7 @@ export default class MusicCard extends Component {
           <span>Favorita</span>
           <input
             type="checkbox"
-            name={ trackName }
+            name={ `${trackName}` }
             id={ trackId }
             onChange={ onChange }
             defaultChecked={ checked } // https://bobbyhadz.com/blog/react-set-checkbox-checked  - tratar checkbox com boleano
