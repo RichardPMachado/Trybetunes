@@ -14,7 +14,7 @@ export default class MusicCard extends Component {
             name={ trackName }
             id={ trackId }
             onChange={ onChange }
-            checked={ checked }
+            defaultChecked={ checked } // https://bobbyhadz.com/blog/react-set-checkbox-checked  - tratar checkbox com boleano
           />
         </label>
         <audio data-testid="audio-component" src={ previewUrl } controls>

@@ -38,24 +38,38 @@ export default class Album extends Component {
     return info;
   };
 
-  handleFavoriteSongs = async ({ target }) => {
+  removeFavorites = async (id) => {
     this.setState({ isLoading: true });
-    const { id, name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    }, async () => {
-      const musics = await getFavoriteSongs();
-      if (!value) {
-        await removeSong(id);
-      } else {
-        await addSong(id);
-      }
-      this.setState((prevState) => ({
-        isFavorites: [...prevState.isFavorites, id, musics],
-        isLoading: false,
-      }));
-    });
+    const info = await getMusics(id);
+    await removeSong(info[0]);
+    this.setState({ isLoading: false });
+  };
+
+  addFavorites = async (id) => {
+    this.setState({ isLoading: true });
+    // const { id, name } = target;
+    // const value = target.type === 'checkbox' ? target.checked : target.value;
+    // console.log(target.checked);
+    // this.setState({
+    //   [name]: value,
+    // }, async () => {
+    // const musics = await getFavoriteSongs();
+    const info = await getMusics(id);
+    await addSong(info[0]);
+    this.setState({ isLoading: false });
+    // this.setState((prevState) => ({
+    //   isFavorites: [...prevState.isFavorites, id, musics],
+    //   isLoading: false,
+    // }));
+    // });
+  };
+
+  handleFavoriteSongs = async ({ target }) => {
+    const { checked, id } = target;
+
+    if (!checked) {
+      this.removeFavorites(id);
+    } else this.addFavorites(id);
   };
 
   render() {
@@ -78,8 +92,7 @@ export default class Album extends Component {
                     trackId={ music.trackId.toString() }
                     onChange={ this.handleFavoriteSongs }
                     checked={ isFavorites.some(
-                      (e) => e === music.trackId.toString()
-                      || e.trackId === music.trackId,
+                      (e) => e.trackId === music.trackId,
                     ) }
                   />))}
               </div>
