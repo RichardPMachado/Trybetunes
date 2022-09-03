@@ -36,7 +36,6 @@ export default class Login extends Component {
   };
 
   render() {
-    // const { isredirect } = this.props;
     const { loginNameInput, isDisabled, loading, isRedirect } = this.state;
     const LoginScreen = (
       <form>
