@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class MusicCard extends Component {
   render() {
-    const { previewUrl, trackName, trackId, checked, onChange } = this.props;
-    console.log(checked);
+    const { previewUrl, trackName, trackId, checked,
+      onChange } = this.props;
+    // console.log(checked);
     return (
       <div>
         <p>{ trackName }</p>

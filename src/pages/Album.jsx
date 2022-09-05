@@ -24,7 +24,7 @@ export default class Album extends Component {
     const favoritesMusics = await getFavoriteSongs();
     const info = await music[0];
     const data = await music.filter((_e, i) => i > 0);
-    console.log(data);
+    // console.log(data);
     this.setState({
       data,
       artistName: info.artistName,
@@ -89,7 +89,7 @@ export default class Album extends Component {
           <h3 data-testid="artist-name">{artistName}</h3>
           {data.map((music) => (
             <MusicCard
-              key={ music.trackId }
+              key={ music.trackId.toString() }
               trackName={ music.trackName }
               previewUrl={ music.previewUrl }
               trackId={ music.trackId.toString() }

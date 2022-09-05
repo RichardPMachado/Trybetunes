@@ -1,41 +1,58 @@
 import React, { Component } from 'react';
 import Header from '../componentes/Header';
-// import { getFavoriteSongs } from '../services/favoriteSongsAPI';
-// import MusicCard from '../componentes/MusicCard';
+// import getMusics from '../services/musicsAPI';
+import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import Loading from './Loading';
+import MusicCard from '../componentes/MusicCard';
 
 export default class Favorites extends Component {
-  // state = {
-  //   favoritesMusics: [],
-  // };
+  state = {
+    favoritesMusics: [],
+    isLoading: true,
+  };
 
-  // componentDidMount() {
-  //   this.handleFavoriteMusics();
-  // }
+  componentDidMount() {
+    // this.setState({ isLoading: true });
+    this.handleFavoriteMusics();
+  }
 
-  // handleFavoriteMusics = async () => {
-  //   const favoritesongs = await getFavoriteSongs();
-  //   const favoritesMusics = favoritesongs[0];
-  //   this.setState({
-  //     favoritesMusics: [...favoritesMusics],
-  //   });
-  // };
+  handleFavoriteMusics = async () => {
+    const favoriteSongs = await getFavoriteSongs();
+    // const a = favoriteSongs;
+    // console.log(a);
+    this.setState({
+      favoritesMusics: favoriteSongs,
+      isLoading: false,
+    });
+  };
+
+  removeFavorites = async (event) => {
+    // const { id } = target;
+    this.setState({ isLoading: true });
+    // const info = await getMusics(id);
+    await removeSong(event);
+    this.handleFavoriteMusics();
+  };
 
   render() {
-    // const { favoritesMusics } = this.state;
+    const { favoritesMusics, isLoading } = this.state;
     return (
-      <>
+      <div data-testid="page-favorites">
         <Header />
-        <div data-testid="page-favorites">Favorites</div>
-        {/* {favoritesMusics.map((music) => (
-          <MusicCard
-            key={ music.trackId.toString() }
-            trackName={ music.trackName }
-            previewUrl={ music.previewUrl }
-            trackId={ music.trackId.toString() }
-            onChange={ this.handleFavoriteMusics }
-            checked
-          />))} */}
-      </>
+        { isLoading ? <Loading />
+          : (
+            favoritesMusics.map((music) => (
+              <MusicCard
+                key={ music.trackId }
+                trackName={ music.trackName }
+                previewUrl={ music.previewUrl }
+                trackId={ music.trackId }
+                onChange={ () => this.removeFavorites(music) }
+                checked
+              />))
+          )}
+
+      </div>
     );
   }
 }
